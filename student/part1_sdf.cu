@@ -40,14 +40,14 @@ HD float sphere_trace(vec3 ro, vec3 rd, float k, int* steps) {
     *steps = 0;
     for (int i = 0; i < MAX_STEPS; ++i) {
         // TODO (1b) 1: Point at distance t along the ray: ro + t * rd.
-        vec3 p = task_blank<vec3>("1b");
+        vec3 p = ro + t * rd;
         // TODO (1b) 2: Ask current_scene(p, k) how far the surface is.
-        float distance = task_blank<float>("1b");
+        float distance = current_scene(p, k);
         *steps = i + 1; // Count this sample, including an immediate hit.
         // TODO (1b) 3: Touching means distance < HIT_EPS.
-        if (task_blank<bool>("1b")) return t;
+        if (distance < HIT_EPS) return t;
         // TODO (1b) 4: Move forward by distance.
-        t += task_blank<float>("1b");
+        t += distance;
         if (t > MAX_DIST) break;
     }
     return -1;
